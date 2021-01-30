@@ -12,13 +12,14 @@ const githubAPIInstance = axios.create({
   baseURL: BASE_URL
 });
 
-export function getUserRepo(userName, config) {
+export function getUserRepo(userName, config, callback) {
   let url = `${API_PATH.userRepo(userName)}`;
+  let defaultConfig = {
+    // recommended config
+    accept: "application/vnd.github.v3+json"
+  };
+  config = Object.assign({}, defaultConfig, config);
   githubAPIInstance.get(url, config).then(response => {
-    console.log(response.data);
-    console.log(response.status);
-    console.log(response.statusText);
-    console.log(response.headers);
-    console.log(response.config);
+    callback && callback(response);
   });
 }
