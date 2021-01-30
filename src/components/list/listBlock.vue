@@ -3,7 +3,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "ListBlock"
+};
 </script>
 
 <style></style>
