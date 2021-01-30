@@ -1,20 +1,21 @@
 <template>
   <div>
     <h1>This is my github repo</h1>
-    <ListBlock />
+    <ListBlock v-for="repo in repoData" :repoProp="repo" :key="repo.id" />
   </div>
 </template>
 
 <script>
 import ListBlock from "../components/list/listBlock";
 import { getUserRepo } from "../api/github";
-const REPO_PER_PAGE = 3;
+const REPO_PER_PAGE = 4;
 export default {
   REPO_PER_PAGE,
   name: "ListView",
   data() {
     return {
-      pagination: 1
+      pagination: 1,
+      repoData: []
     };
   },
   components: {
@@ -37,7 +38,10 @@ export default {
       );
     },
     getUserRepoCallback(response) {
-      console.log(response, "this is getUserRepoCallback");
+      if (response.status === 200) {
+        let data = response.data;
+        this.repoData = this.repoData.concat(data);
+      }
     }
   }
 };
