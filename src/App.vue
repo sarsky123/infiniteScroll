@@ -1,11 +1,16 @@
 <template>
-  <div id="app"></div>
+  <div id="app">
+    <ListView />
+  </div>
 </template>
 
 <script>
+import ListView from "./views/listView";
 export default {
   name: "App",
-  components: {}
+  components: {
+    ListView
+  }
 };
 </script>
 
